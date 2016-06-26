@@ -1,5 +1,5 @@
 module.exports = {
-  description: 'Generates files for ember theater',
+  description: 'Generates files for ember engine',
 
   normalizeEntityName: function() {},
 

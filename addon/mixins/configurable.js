@@ -6,5 +6,5 @@ const {
 } = Ember;
 
 export default Mixin.create({
-  config: multiton('affinity-engine/config', 'theaterId')
+  config: multiton('affinity-engine/config', 'engineId')
 });

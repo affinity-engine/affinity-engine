@@ -28,7 +28,7 @@ export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
 
   store: service(),
 
-  config: multiton('affinity-engine/config', 'theaterId'),
+  config: multiton('affinity-engine/config', 'engineId'),
 
   maxStatePoints: configurable(configurationTiers, 'maxStatePoints'),
 
@@ -36,19 +36,19 @@ export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
   statePoints: computed(() => Ember.A()),
 
   setupEventListenerss: on('init', function() {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
 
-    this.on(`et:${theaterId}:saveIsCreating`, this, this.createRecord);
-    this.on(`et:${theaterId}:saveIsUpdating`, this, this.updateRecord);
-    this.on(`et:${theaterId}:saveIsDestroying`, this, this.deleteRecord);
-    this.on(`et:${theaterId}:appendingActiveState`, this, this.appendActiveState);
-    this.on(`et:${theaterId}:gameIsRewinding`, this, this.loadStatePoint);
-    this.on(`et:${theaterId}:gameIsResetting`, this, this.resetActiveState);
-    this.on(`et:${theaterId}:settingStateValue`, this, this.setStateValue);
-    this.on(`et:${theaterId}:decrementingStateValue`, this, this.decrementStateValue);
-    this.on(`et:${theaterId}:incrementingStateValue`, this, this.incrementStateValue);
-    this.on(`et:${theaterId}:togglingStateValue`, this, this.toggleStateValue);
-    this.on(`et:${theaterId}:deletingStateValue`, this, this.deleteStateValue);
+    this.on(`et:${engineId}:saveIsCreating`, this, this.createRecord);
+    this.on(`et:${engineId}:saveIsUpdating`, this, this.updateRecord);
+    this.on(`et:${engineId}:saveIsDestroying`, this, this.deleteRecord);
+    this.on(`et:${engineId}:appendingActiveState`, this, this.appendActiveState);
+    this.on(`et:${engineId}:gameIsRewinding`, this, this.loadStatePoint);
+    this.on(`et:${engineId}:gameIsResetting`, this, this.resetActiveState);
+    this.on(`et:${engineId}:settingStateValue`, this, this.setStateValue);
+    this.on(`et:${engineId}:decrementingStateValue`, this, this.decrementStateValue);
+    this.on(`et:${engineId}:incrementingStateValue`, this, this.incrementStateValue);
+    this.on(`et:${engineId}:togglingStateValue`, this, this.toggleStateValue);
+    this.on(`et:${engineId}:deletingStateValue`, this, this.deleteStateValue);
   }),
 
   mostRecentSave: computed({
@@ -65,24 +65,24 @@ export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
 
   saves: computed({
     get() {
-      const theaterId = get(this, 'theaterId');
+      const engineId = get(this, 'engineId');
 
       return get(this, 'store').query('affinity-engine/local-save', {
-        theaterId
+        engineId
       });
     }
   }).readOnly().volatile(),
 
   // RECORD MANAGEMENT //
   createRecord(name, options) {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
     const version = get(this, 'version');
     const statePoints = this._getCurrentStatePoints();
 
     const record = get(this, 'store').createRecord('affinity-engine/local-save', {
       name,
       statePoints,
-      theaterId,
+      engineId,
       version,
       ...options
     });
@@ -97,13 +97,13 @@ export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
   },
 
   updateRecord(record, options) {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
     const version = get(this, 'version');
     const statePoints = this._getCurrentStatePoints();
 
     setProperties(record, {
       statePoints,
-      theaterId,
+      engineId,
       version,
       ...options
     });

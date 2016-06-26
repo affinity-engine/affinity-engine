@@ -8,7 +8,7 @@ const {
 } = Ember;
 
 export default Mixin.create({
-  theaterId: computed('_multitonServiceKeys.[]', {
+  engineId: computed('_multitonServiceKeys.[]', {
     get() {
       const keys = get(this, '_multitonServiceKeys');
 

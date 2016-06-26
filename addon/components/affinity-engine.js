@@ -20,7 +20,7 @@ const focusDebounceDuration = 100;
 export default Component.extend({
   layout,
 
-  hook: 'ember_theater',
+  hook: 'affinity_engine',
 
   'aria-live': 'polite',
   ariaRole: 'region',
@@ -29,23 +29,23 @@ export default Component.extend({
   tabIndex: 0,
 
   multitonManager: service('multiton-service-manager'),
-  configService: multiton('affinity-engine/config', 'theaterId'),
-  producer: multiton('affinity-engine/producer', 'theaterId'),
-  fixtureStore: multiton('affinity-engine/fixture-store', 'theaterId'),
+  configService: multiton('affinity-engine/config', 'engineId'),
+  producer: multiton('affinity-engine/producer', 'engineId'),
+  fixtureStore: multiton('affinity-engine/fixture-store', 'engineId'),
 
   isFocused: alias('producer.isFocused'),
 
   init() {
-    this._ensureTheaterId();
+    this._ensureEngineId();
     get(this, 'configService').initializeConfig(get(this, 'config'));
     this._loadfixtures();
 
     this._super();
   },
 
-  _ensureTheaterId() {
-    if (isNone(get(this, 'theaterId'))) {
-      set(this, 'theaterId', 'affinity-engine-default');
+  _ensureEngineId() {
+    if (isNone(get(this, 'engineId'))) {
+      set(this, 'engineId', 'affinity-engine-default');
     }
   },
 
@@ -63,9 +63,9 @@ export default Component.extend({
   },
 
   destroyMultitons: on('willDestroyElement', function() {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
 
-    get(this, 'multitonManager').removeServices(theaterId);
+    get(this, 'multitonManager').removeServices(engineId);
   }),
 
   claimFocus: on('focusIn', function() {

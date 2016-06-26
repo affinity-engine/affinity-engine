@@ -1,20 +1,20 @@
-{{!-- <div class="theater-container">
-  {{#affinity-engine theaterId="theater1" config=config fixtures=fixtures isFocused=true as |theater|}}
-    {{#if theater.isLoaded}}
-      {{affinity-engine/director theaterId=theater.theaterId initialScene="demo"}}
-      {{#affinity-engine/menu-bar theaterId=theater.theaterId as |menuBar|}}
-        {{affinity-engine/menu-bar/rewind theaterId=menuBar.theaterId}}
-        {{affinity-engine/menu-bar/save theaterId=menuBar.theaterId}}
-        {{affinity-engine/menu-bar/load theaterId=menuBar.theaterId}}
-        {{affinity-engine/menu-bar/reset theaterId=menuBar.theaterId}}
-        {{affinity-engine/menu-bar/resize theaterId=menuBar.theaterId}}
+{{!-- <div class="engine-container">
+  {{#affinity-engine engineId="engine1" config=config fixtures=fixtures isFocused=true as |engine|}}
+    {{#if engine.isLoaded}}
+      {{affinity-engine/director engineId=engine.engineId initialScene="demo"}}
+      {{#affinity-engine/menu-bar engineId=engine.engineId as |menuBar|}}
+        {{affinity-engine/menu-bar/rewind engineId=menuBar.engineId}}
+        {{affinity-engine/menu-bar/save engineId=menuBar.engineId}}
+        {{affinity-engine/menu-bar/load engineId=menuBar.engineId}}
+        {{affinity-engine/menu-bar/reset engineId=menuBar.engineId}}
+        {{affinity-engine/menu-bar/resize engineId=menuBar.engineId}}
       {{/affinity-engine/menu-bar}}
     {{else}}
-      {{affinity-engine/curtain theaterId=theater.theaterId filesToPreload="backdrops:src" completePreload=theater.completePreload}}
+      {{affinity-engine/curtain engineId=engine.engineId filesToPreload="backdrops:src" completePreload=engine.completePreload}}
     {{/if}}
   {{/affinity-engine}}
 </div> --}}
-<div class="theater-container">
-  {{#affinity-engine theaterId="theater2" isFocused=true as |theater|}}
+<div class="engine-container">
+  {{#affinity-engine engineId="engine2" isFocused=true as |engine|}}
   {{/affinity-engine}}
 </div>

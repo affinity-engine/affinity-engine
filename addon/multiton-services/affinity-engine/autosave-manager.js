@@ -22,22 +22,22 @@ const configurationTiers = [
 export default MultitonService.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIdsMixin, {
   store: service(),
 
-  config: multiton('affinity-engine/config', 'theaterId'),
+  config: multiton('affinity-engine/config', 'engineId'),
 
   maxAutosaves: configurable(configurationTiers, 'maxAutosaves'),
 
   setupEvents: on('init', function() {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
 
-    this.on(`et:${theaterId}:writingAutosave`, this, this.writeAutosave);
+    this.on(`et:${engineId}:writingAutosave`, this, this.writeAutosave);
   }),
 
   autosaves: computed({
     get() {
-      const theaterId = get(this, 'theaterId');
+      const engineId = get(this, 'engineId');
 
       return get(this, 'store').query('affinity-engine/local-save', {
-        theaterId,
+        engineId,
         isAutosave: true
       });
     }
@@ -46,14 +46,14 @@ export default MultitonService.extend(BusPublisherMixin, BusSubscriberMixin, Mul
   writeAutosave() {
     get(this, 'autosaves').then((autosaves) => {
       run(() => {
-        const theaterId = get(this, 'theaterId');
+        const engineId = get(this, 'engineId');
 
         if (get(this, 'maxAutosaves') > get(autosaves, 'length')) {
-          this.publish(`et:${theaterId}:saveIsCreating`, '', { isAutosave: true });
+          this.publish(`et:${engineId}:saveIsCreating`, '', { isAutosave: true });
         } else {
           const autosave = autosaves.sortBy('updated').get('firstObject');
 
-          this.publish(`et:${theaterId}:saveIsUpdating`, autosave);
+          this.publish(`et:${engineId}:saveIsUpdating`, autosave);
         }
       });
     });

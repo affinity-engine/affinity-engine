@@ -17,28 +17,28 @@ const {
 export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
   attrs: computed(() => Ember.Object.create()),
 
-  saveStateManager: multiton('affinity-engine/save-state-manager', 'theaterId'),
+  saveStateManager: multiton('affinity-engine/save-state-manager', 'engineId'),
 
   init() {
-    const theaterId = get(this, 'theaterId');
+    const engineId = get(this, 'engineId');
 
-    this.on(`et:${theaterId}:reseting`, this, this.resetConfig);
+    this.on(`et:${engineId}:reseting`, this, this.resetConfig);
 
     this._super();
   },
 
-  initializeConfig(theaterConfig = {}) {
-    set(this, 'theaterConfig', theaterConfig);
+  initializeConfig(engineConfig = {}) {
+    set(this, 'engineConfig', engineConfig);
 
     return this.resetConfig();
   },
 
   resetConfig() {
-    const theaterConfig = get(this, 'theaterConfig');
+    const engineConfig = get(this, 'engineConfig');
     const configs = get(this, '_configs').sort((a, b) => get(a, 'priority') - get(b, 'priority'));
     const saveStateManager = get(this, 'saveStateManager');
     const savedConfig = saveStateManager.getStateValue('_config') || {};
-    const mergedConfig = deepMerge({}, ...configs, theaterConfig, savedConfig);
+    const mergedConfig = deepMerge({}, ...configs, engineConfig, savedConfig);
     const attrs = get(this, 'attrs');
 
     return setProperties(attrs, mergedConfig);

@@ -3,12 +3,12 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { $hook, initialize as initializeHook } from 'ember-hook';
 import { initialize as initializeMultiton } from 'ember-multiton-service';
-import { initialize as initializeTheater } from 'affinity-engine';
+import { initialize as initializeEngine } from 'affinity-engine';
 
 const { getOwner } = Ember;
 const { run: { later } } = Ember;
 
-moduleForComponent('affinity-engine', 'Integration | Component | ember theater', {
+moduleForComponent('affinity-engine', 'Integration | Component | ember engine', {
   integration: true,
 
   beforeEach() {
@@ -16,32 +16,32 @@ moduleForComponent('affinity-engine', 'Integration | Component | ember theater',
 
     initializeHook();
     initializeMultiton(appInstance);
-    initializeTheater(appInstance);
+    initializeEngine(appInstance);
   }
 });
 
-test('`theaterId` defaults to `affinity-engine-default`', function(assert) {
+test('`engineId` defaults to `affinity-engine-default`', function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    {{#affinity-engine as |theater|}}
-      <div data-test={{hook "theater_id"}}>{{theater.theaterId}}</div>
+    {{#affinity-engine as |engine|}}
+      <div data-test={{hook "engine_id"}}>{{engine.engineId}}</div>
     {{/affinity-engine}}
   `);
 
-  assert.equal($hook('theater_id').text().trim(), 'affinity-engine-default', '`theaterId` has correct default');
+  assert.equal($hook('engine_id').text().trim(), 'affinity-engine-default', '`engineId` has correct default');
 });
 
-test('`theaterId` can be passed in', function(assert) {
+test('`engineId` can be passed in', function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    {{#affinity-engine theaterId="foo" as |theater|}}
-      <div data-test={{hook "theater_id"}}>{{theater.theaterId}}</div>
+    {{#affinity-engine engineId="foo" as |engine|}}
+      <div data-test={{hook "engine_id"}}>{{engine.engineId}}</div>
     {{/affinity-engine}}
   `);
 
-  assert.equal($hook('theater_id').text().trim(), 'foo', '`theaterId` is correctly set');
+  assert.equal($hook('engine_id').text().trim(), 'foo', '`engineId` is correctly set');
 });
 
 test('`config` is passed to the `configService` on init', function(assert) {
@@ -90,23 +90,23 @@ test('`fixtures` are loaded into the `fixtureStore` on init', function(assert) {
 test('`destroyMultitons` triggers `multitonManager` on destroy', function(assert) {
   assert.expect(1);
 
-  const theaterId = 'foo';
+  const engineId = 'foo';
 
   const multitonManager = Ember.Object.create({
     removeServices(arg) {
-      assert.equal(arg, theaterId, '`removeServices` recieves the `theaterId`');
+      assert.equal(arg, engineId, '`removeServices` recieves the `engineId`');
     }
   });
 
   this.setProperties({
     multitonManager,
-    theaterId,
+    engineId,
     visible: true
   });
 
   this.render(hbs`
     {{#if visible}}
-      {{affinity-engine multitonManager=multitonManager theaterId=theaterId}}
+      {{affinity-engine multitonManager=multitonManager engineId=engineId}}
     {{/if}}
   `);
 
@@ -125,7 +125,7 @@ test('`isFocused` is set by the `focus` event', function(assert) {
 
   assert.equal(producer.get('isFocused'), false, '`isFocused` defaults to the producer value');
 
-  $hook('ember_theater').focus();
+  $hook('affinity_engine').focus();
 
   assert.equal(producer.get('isFocused'), false, '`isFocused` is not immediately set');
 
@@ -148,7 +148,7 @@ test('`isFocused` is lost by the `focus` event', function(assert) {
 
   assert.equal(producer.get('isFocused'), true, '`isFocused` can be passed in');
 
-  $hook('ember_theater').blur();
+  $hook('affinity_engine').blur();
 
   assert.equal(producer.get('isFocused'), true, '`isFocused` is not immediately changed');
 
@@ -163,8 +163,8 @@ test('`completePreload` sets `isLoaded` to true', function(assert) {
   assert.expect(3);
 
   this.render(hbs`
-    {{#affinity-engine as |theater|}}
-      <button {{action theater.completePreload}} data-test={{hook "complete_preload"}}>{{theater.isLoaded}}</button>
+    {{#affinity-engine as |engine|}}
+      <button {{action engine.completePreload}} data-test={{hook "complete_preload"}}>{{engine.isLoaded}}</button>
     {{/affinity-engine}}
   `);
 
