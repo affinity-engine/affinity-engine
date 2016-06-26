@@ -14,7 +14,7 @@ function getParentApp(app) {
 }
 
 module.exports = {
-  name: 'ember-theater',
+  name: 'affinity-engine',
 
   treeForVendor: function(){
     var _this = this;

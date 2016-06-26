@@ -3,6 +3,6 @@
 
 module.exports = function(/* environment, appConfig */) {
   return {
-    podModulePrefix: 'ember-theater/pods',
+    podModulePrefix: 'affinity-engine/pods',
   };
 };

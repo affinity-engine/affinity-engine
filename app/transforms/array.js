@@ -1,1 +1,1 @@
-export { default } from 'ember-theater/transforms/array';
+export { default } from 'affinity-engine/transforms/array';

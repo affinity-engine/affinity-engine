@@ -1,7 +1,7 @@
-[![npm version](https://badge.fury.io/js/ember-theater.svg)](https://badge.fury.io/js/ember-theater)
-[![Build Status](https://travis-ci.org/ember-theater/ember-theater.svg?branch=master)](https://travis-ci.org/ember-theater/ember-theater)
+[![npm version](https://badge.fury.io/js/affinity-engine.svg)](https://badge.fury.io/js/affinity-engine)
+[![Build Status](https://travis-ci.org/affinity-engine/affinity-engine.svg?branch=master)](https://travis-ci.org/affinity-engine/affinity-engine)
 
-# ember-theater
+# affinity-engine
 
 A modular game engine built with Ember.js.
 

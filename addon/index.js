@@ -1,17 +1,17 @@
-import ConfigurableMixin from 'ember-theater/mixins/configurable';
-import MultitonIdsMixin from 'ember-theater/mixins/multiton-ids';
-import WindowResizeMixin from 'ember-theater/mixins/multiton-ids';
+import ConfigurableMixin from 'affinity-engine/mixins/configurable';
+import MultitonIdsMixin from 'affinity-engine/mixins/multiton-ids';
+import WindowResizeMixin from 'affinity-engine/mixins/multiton-ids';
 
-import configurable, { deepConfigurable, deepArrayConfigurable } from 'ember-theater/macros/ember-theater/configurable';
+import configurable, { deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
 
-import animate from 'ember-theater/utils/ember-theater/animate';
-import deepMerge from 'ember-theater/utils/ember-theater/deep-merge';
-import deepStub from 'ember-theater/utils/ember-theater/deep-stub';
-import gatherTypes from 'ember-theater/utils/ember-theater/gather-types';
-import nativeCopy from 'ember-theater/utils/ember-theater/native-copy';
+import animate from 'affinity-engine/utils/affinity-engine/animate';
+import deepMerge from 'affinity-engine/utils/affinity-engine/deep-merge';
+import deepStub from 'affinity-engine/utils/affinity-engine/deep-stub';
+import gatherTypes from 'affinity-engine/utils/affinity-engine/gather-types';
+import nativeCopy from 'affinity-engine/utils/affinity-engine/native-copy';
 
-import { initialize as loadTranslations } from 'ember-theater/instance-initializers/ember-theater/load-translations';
-import { initialize as initializeConfig } from 'ember-theater/instance-initializers/ember-theater/register-configs';
+import { initialize as loadTranslations } from 'affinity-engine/instance-initializers/affinity-engine/load-translations';
+import { initialize as initializeConfig } from 'affinity-engine/instance-initializers/affinity-engine/register-configs';
 
 const initialize = function initialize(appInstance) {
   loadTranslations(appInstance);
