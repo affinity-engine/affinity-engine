@@ -1,7 +1,7 @@
 {
   "name": "affinity-engine",
   "version": "0.0.0",
-  "description": "A game engine for the people",
+  "description": "Solidarity, creativity, love: a people's game engine",
   "directories": {
     "doc": "doc",
     "test": "tests"
