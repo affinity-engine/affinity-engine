@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { MultitonService } from 'ember-multiton-service';
 import multiton from 'ember-multiton-service';
 import { BusSubscriberMixin } from 'ember-message-bus';
 import { MultitonIdsMixin, deepMerge, gatherTypes } from 'affinity-engine';
 
 const {
+  Service,
   computed,
   get,
   getOwner,
@@ -14,7 +14,7 @@ const {
   setProperties
 } = Ember;
 
-export default MultitonService.extend(BusSubscriberMixin, MultitonIdsMixin, {
+export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
   attrs: computed(() => Ember.Object.create()),
 
   saveStateManager: multiton('affinity-engine/save-state-manager', 'engineId'),

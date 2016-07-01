@@ -1,14 +1,14 @@
 import Ember from 'ember';
-import { MultitonService } from 'ember-multiton-service';
 import { MultitonIdsMixin } from 'affinity-engine';
 
 const {
+  Service,
   computed,
   get,
   set
 } = Ember;
 
-export default MultitonService.extend(MultitonIdsMixin, {
+export default Service.extend(MultitonIdsMixin, {
   fixtureMap: computed(() => Ember.Object.create()),
 
   add(type, fixtures) {

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { $hook, initialize as initializeHook } from 'ember-hook';
-import { initialize as initializeMultiton } from 'ember-multiton-service';
 import { initialize as initializeEngine } from 'affinity-engine';
 
 const { getOwner } = Ember;
@@ -15,7 +14,6 @@ moduleForComponent('affinity-engine', 'Integration | Component | ember engine', 
     const appInstance = getOwner(this);
 
     initializeHook();
-    initializeMultiton(appInstance);
     initializeEngine(appInstance);
   }
 });

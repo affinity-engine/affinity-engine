@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { MultitonService } from 'ember-multiton-service';
 import { MultitonIdsMixin, configurable } from 'affinity-engine';
 import { BusPublisherMixin, BusSubscriberMixin } from 'ember-message-bus';
 import multiton from 'ember-multiton-service';
 
 const {
+  Service,
   computed,
   get,
   on,
@@ -19,7 +19,7 @@ const configurationTiers = [
   'config.attrs.globals'
 ];
 
-export default MultitonService.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIdsMixin, {
+export default Service.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIdsMixin, {
   store: service(),
 
   config: multiton('affinity-engine/config', 'engineId'),
