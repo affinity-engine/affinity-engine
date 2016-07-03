@@ -1,10 +1,9 @@
 ---
 language: node_js
 node_js:
-  - "6"
+  - "4"
 
-sudo: required
-dist: trusty
+sudo: false
 
 cache:
   directories:
@@ -22,28 +21,15 @@ matrix:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sudo apt-get update
-  - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
-  - npm config set progress false
+  - npm config set spin false
   - npm install -g bower
-  - npm install -g npm@^3
+  - npm install phantomjs-prebuilt
 
 install:
   - npm install
   - bower install
 
 script:
-  - ember try $EMBER_TRY_SCENARIO test
-deploy:
-  provider: npm
-  email: null@affinitygamescollective.org
-  api_key:
-    secure: Kl5bl7upzc2/lDmMJI7HNn6hJ9pwcHcIT6ZdRmku+X7gps4RtdZtmk0rtRrYCDuTKMAaj+wxRZIANoRcLr0UliMzwM4VMWD7K1GQ4AUXqqy5RuZbD9lVGHnSNgLxKpGeVhQgLPuu35inYawC3CPBnu6/uH/M2gFqnqpgkegOT231rlJJ99J4Yc9NTfi4G4sphx3rgLI+NjCyPMqcTDIo1X7rd/EafdXmfMNmWs8ZkOnK0Cx1VMCAuoZOWKz8JYMHxKVmjq8RwKncFDjUBkwDVKe1g0WZeVjRs+pLOr4Usl3oRLUi+ppjugl69cm//8hdRnPAGU+K5yHeUO2hhH+WRE+RMRJM+4MtEqKBEiFu4H51GDZMBhnHj0Vfy0IasVP3iGczanoupu3J4VMCg/Hi9tbedkghABubx2GL4gN7RNhBUq/YLrH+EGIOiwvg5S2T1/5qqgyu5AzDPu4wSnWT42RAarvnCMJbzL6xnvnfHqN5Zi6QjSPDKEXGtdC7oQvoxWNbdtTf4LyP33TIHJeoT4t89U9h6tUt/Bg7F8r0krbopvJmfOlyk9qD24hgJJuY8j8ERtoc1wlMyGYXtgFe6qnmFuWxjRNizbJIs5qYF4H0qN0W94XtTLHI6xrOgXZTftnexmpgTOuifZBUGzooLObNqxg8sHMMpgC9+K4v9wc=
-  on:
-    tags: true
-    repo: affinity-engine/affinity-engine
+  # Usually, it's ok to finish the test scenario without reverting
+  #  to the addon's original dependency state, skipping "cleanup".
+  - ember try $EMBER_TRY_SCENARIO test --skip-cleanup

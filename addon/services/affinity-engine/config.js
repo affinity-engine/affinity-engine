@@ -11,7 +11,8 @@ const {
   isEmpty,
   isPresent,
   set,
-  setProperties
+  setProperties,
+  typeOf
 } = Ember;
 
 export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
@@ -51,7 +52,7 @@ export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
 
       return configNames.map((configName) => {
         return appInstance.lookup(`affinity-engine/config:${configName}`);
-      }).filter((config) => isPresent(config));
+      }).filter((config) => isPresent(config) && typeOf(config) === 'object');
     }
   }),
 

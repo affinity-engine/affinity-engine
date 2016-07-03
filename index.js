@@ -35,8 +35,6 @@ module.exports = {
   included: function(app) {
     this._super.included(app);
 
-    this.eachAddonInvoke('safeIncluded', [app]);
-
     app = getParentApp(app);
 
     app.import('vendor/velocity-animate/velocity.js');
