@@ -1,8 +1,8 @@
 $breakpoints: (
   small: 0,
   medium: 640px
-);
+) !default;
 
 $breakpoint_factors: (
   small: 0.7
-);
+) !default;

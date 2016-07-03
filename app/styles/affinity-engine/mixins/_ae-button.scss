@@ -1,0 +1,11 @@
+.ae-button {
+  border-radius: $ae-button-border-radius;
+  font-size: $ae-button-font-size;
+  transition: all $ae-button-transition-speed ease;
+
+  cursor: pointer;
+
+  &:hover, &:focus {
+    outline: 0;
+  }
+}

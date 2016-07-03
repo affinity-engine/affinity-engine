@@ -1,6 +1,6 @@
 // Taken from Bootstrap: https://github.com/twbs/bootstrap/blob/master/dist/css/bootstrap.css
 
-.sr-only {
+.ae-sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -10,8 +10,8 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
+.ae-sr-only-focusable:active,
+.ae-sr-only-focusable:focus {
   position: static;
   width: auto;
   height: auto;

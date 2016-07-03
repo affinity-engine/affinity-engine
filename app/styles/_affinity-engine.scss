@@ -1,0 +1,22 @@
+$ae-primary-font-family: false !default;
+
+@import "affinity-engine/variables";
+@import "affinity-engine/mixins";
+
+.affinity-engine {
+  @extend .ae-full;
+  @extend .ae-undraggable;
+
+  background-color: $ae-main-background-color;
+
+  @if $ae-primary-font-family {
+    font-family: $ae-primary-font-family;
+  }
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+}
