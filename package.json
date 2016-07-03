@@ -27,7 +27,6 @@
     "ember-cli-eslint": "1.4.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-moment-shim": "2.0.0",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.0",
@@ -37,7 +36,6 @@
     "ember-export-application-global": "^1.0.5",
     "ember-hook": "1.1.1",
     "ember-load-initializers": "^0.5.1",
-    "ember-moment": "7.0.0-beta.3",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.1"
   },
@@ -52,7 +50,6 @@
     "ember-cli-sass": "^5.3.1",
     "ember-get-config": "0.0.4",
     "ember-i18n": "4.2.2",
-    "ember-lokijs": "0.2.0",
     "ember-message-bus": "0.2.0",
     "ember-multiton-service": "0.1.0",
     "velocity-animate": "^1.2.2"

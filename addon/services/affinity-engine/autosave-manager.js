@@ -29,7 +29,7 @@ export default Service.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIds
   setupEvents: on('init', function() {
     const engineId = get(this, 'engineId');
 
-    this.on(`et:${engineId}:writingAutosave`, this, this.writeAutosave);
+    this.on(`ae:${engineId}:writingAutosave`, this, this.writeAutosave);
   }),
 
   autosaves: computed({
@@ -49,11 +49,11 @@ export default Service.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIds
         const engineId = get(this, 'engineId');
 
         if (get(this, 'maxAutosaves') > get(autosaves, 'length')) {
-          this.publish(`et:${engineId}:saveIsCreating`, '', { isAutosave: true });
+          this.publish(`ae:${engineId}:saveIsCreating`, '', { isAutosave: true });
         } else {
           const autosave = autosaves.sortBy('updated').get('firstObject');
 
-          this.publish(`et:${engineId}:saveIsUpdating`, autosave);
+          this.publish(`ae:${engineId}:saveIsUpdating`, autosave);
         }
       });
     });

@@ -21,11 +21,5 @@ export default {
       moveDown: ['ArrowDown', 's'],
       moveUp: ['ArrowUp', 'w']
     }
-  },
-  saveStateManager: {
-    maxStatePoints: false
-  },
-  autosaveManager: {
-    maxAutosaves: 3
   }
 };
