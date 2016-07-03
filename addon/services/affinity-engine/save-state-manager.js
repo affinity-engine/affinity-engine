@@ -12,5 +12,5 @@ export default Service.extend({
     return {};
   },
 
-  setStateValue: K,
+  setStateValue: K
 });
