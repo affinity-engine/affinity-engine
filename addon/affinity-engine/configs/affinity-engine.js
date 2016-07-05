@@ -21,5 +21,11 @@ export default {
       moveDown: ['ArrowDown', 's'],
       moveUp: ['ArrowUp', 'w']
     }
+  },
+  preloader: {
+    path: 'service:affinity-engine/stubs/preloader'
+  },
+  saveStateManager: {
+    path: 'service:affinity-engine/stubs/save-state-manager'
   }
 };

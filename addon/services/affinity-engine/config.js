@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import multiton from 'ember-multiton-service';
-import { BusSubscriberMixin } from 'ember-message-bus';
-import { MultitonIdsMixin, deepMerge, gatherTypes } from 'affinity-engine';
+import { BusPublisherMixin, BusSubscriberMixin } from 'ember-message-bus';
+import { MultitonIdsMixin, deepMerge, gatherTypes, registrant } from 'affinity-engine';
 
 const {
   Service,
@@ -15,10 +14,10 @@ const {
   typeOf
 } = Ember;
 
-export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
+export default Service.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIdsMixin, {
   attrs: computed(() => Ember.Object.create()),
 
-  saveStateManager: multiton('affinity-engine/save-state-manager', 'engineId'),
+  saveStateManager: registrant('saveStateManager'),
 
   init() {
     const engineId = get(this, 'engineId');
@@ -35,14 +34,18 @@ export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
   },
 
   resetConfig() {
+    const attrs = get(this, 'attrs');
     const engineConfig = get(this, 'engineConfig');
     const configs = get(this, '_configs').sort((a, b) => get(a, 'priority') - get(b, 'priority'));
+    const mergedConfig = deepMerge({}, ...configs, engineConfig);
+
+    setProperties(attrs, mergedConfig);
+
     const saveStateManager = get(this, 'saveStateManager');
     const savedConfig = saveStateManager.getStateValue('_config') || {};
-    const mergedConfig = deepMerge({}, ...configs, engineConfig, savedConfig);
-    const attrs = get(this, 'attrs');
+    const savedMergedConfig = deepMerge({}, mergedConfig, savedConfig);
 
-    return setProperties(attrs, mergedConfig);
+    return setProperties(attrs, savedMergedConfig);
   },
 
   _configs: computed({
@@ -61,11 +64,12 @@ export default Service.extend(BusSubscriberMixin, MultitonIdsMixin, {
   },
 
   setProperty(key, value) {
-    const saveStateManager = get(this, 'saveStateManager');
     const _config = this._getSavedConfig(key);
+    const engineId = get(this, 'engineId');
 
     set(_config, key, value);
-    saveStateManager.setStateValue('_config', _config);
+
+    this.publish(`ae:${engineId}:settingStateValue`, '_config', _config);
 
     return set(this, key, value);
   },

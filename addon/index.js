@@ -3,6 +3,7 @@ import MultitonIdsMixin from 'affinity-engine/mixins/multiton-ids';
 import WindowResizeMixin from 'affinity-engine/mixins/multiton-ids';
 
 import configurable, { deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
+import registrant from 'affinity-engine/macros/affinity-engine/registrant';
 
 import animate from 'affinity-engine/utils/affinity-engine/animate';
 import deepMerge from 'affinity-engine/utils/affinity-engine/deep-merge';
@@ -25,6 +26,7 @@ export {
   configurable,
   deepConfigurable,
   deepArrayConfigurable,
+  registrant,
   animate,
   deepMerge,
   deepStub,
