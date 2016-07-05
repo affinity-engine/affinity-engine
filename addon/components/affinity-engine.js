@@ -65,7 +65,7 @@ export default Component.extend({
   destroyMultitons: on('willDestroyElement', function() {
     const engineId = get(this, 'engineId');
 
-    get(this, 'multitonManager').removeServices(engineId);
+    get(this, 'multitonManager').removeServices([{ engineId }]);
   }),
 
   claimFocus: on('focusIn', function() {

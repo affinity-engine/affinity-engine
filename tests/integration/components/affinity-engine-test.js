@@ -92,7 +92,7 @@ test('`destroyMultitons` triggers `multitonManager` on destroy', function(assert
 
   const multitonManager = Ember.Object.create({
     removeServices(arg) {
-      assert.equal(arg, engineId, '`removeServices` recieves the `engineId`');
+      assert.deepEqual(arg, [{ engineId }], '`removeServices` recieves the `engineId`');
     }
   });
 

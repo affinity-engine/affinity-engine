@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { MultitonIdsMixin } from 'affinity-engine';
 import multiton from 'ember-multiton-service';
 
 const {
@@ -12,7 +11,7 @@ const {
   set
 } = Ember;
 
-export default Service.extend(MultitonIdsMixin, {
+export default Service.extend({
   config: multiton('affinity-engine/config', 'engineId'),
 
   registrantMap: computed(() => Ember.Object.create()),

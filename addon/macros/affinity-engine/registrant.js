@@ -12,7 +12,7 @@ export default function registrant(name) {
     get() {
       const owner = getOwner(this);
       const engineId = get(this, 'engineId');
-      const registrar = getMultiton(owner, 'affinity-engine/registrar', [engineId]);
+      const registrar = getMultiton(owner, 'affinity-engine/registrar', [{ engineId }]);
 
       return registrar.lookup(name) || registrar.register(name);
     }

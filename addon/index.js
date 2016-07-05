@@ -1,6 +1,5 @@
 import ConfigurableMixin from 'affinity-engine/mixins/configurable';
-import MultitonIdsMixin from 'affinity-engine/mixins/multiton-ids';
-import WindowResizeMixin from 'affinity-engine/mixins/multiton-ids';
+import WindowResizeMixin from 'affinity-engine/mixins/window-resize';
 
 import configurable, { deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
 import registrant from 'affinity-engine/macros/affinity-engine/registrant';
@@ -21,7 +20,6 @@ const initialize = function initialize(appInstance) {
 
 export {
   ConfigurableMixin,
-  MultitonIdsMixin,
   WindowResizeMixin,
   configurable,
   deepConfigurable,

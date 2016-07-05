@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { BusPublisherMixin, BusSubscriberMixin } from 'ember-message-bus';
-import { MultitonIdsMixin, deepMerge, gatherTypes, registrant } from 'affinity-engine';
+import { deepMerge, gatherTypes, registrant } from 'affinity-engine';
 
 const {
   Service,
@@ -14,7 +14,7 @@ const {
   typeOf
 } = Ember;
 
-export default Service.extend(BusPublisherMixin, BusSubscriberMixin, MultitonIdsMixin, {
+export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
   attrs: computed(() => Ember.Object.create()),
 
   saveStateManager: registrant('saveStateManager'),
