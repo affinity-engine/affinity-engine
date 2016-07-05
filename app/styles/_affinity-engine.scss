@@ -4,7 +4,7 @@ $ae-primary-font-family: false !default;
 @import "affinity-engine/mixins";
 
 .affinity-engine {
-  @extend .ae-full;
+  @extend .ae-full-size;
   @extend .ae-undraggable;
 
   background-color: $ae-main-background-color;
