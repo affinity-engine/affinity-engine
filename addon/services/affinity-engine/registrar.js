@@ -8,6 +8,7 @@ const {
   get,
   getOwner,
   getProperties,
+  isNone,
   set
 } = Ember;
 
@@ -17,8 +18,11 @@ export default Service.extend(MultitonIdsMixin, {
   registrantMap: computed(() => Ember.Object.create()),
 
   register(name) {
-    const { engineId, registrantMap } = getProperties(this, 'engineId', 'registrantMap');
     const path = get(this, `config.attrs.${name}.path`);
+
+    if (isNone(path)) { return; }
+
+    const { engineId, registrantMap } = getProperties(this, 'engineId', 'registrantMap');
     const container = getOwner(this);
     const instance = container._lookupFactory(path).create({ engineId });
 
