@@ -24,7 +24,7 @@ export default {
       effect: { opacity: 0 }
     },
     keys: {
-      accept: ['Space', 'Enter', 'NumpadEnter'],
+      accept: ['Space', 'Enter'],
       cancel: ['Escape'],
       moveDown: ['ArrowDown', 'KeyS', 'Numpad2'],
       moveLeft: ['ArrowLeft', 'KeyA', 'Numpad4'],
