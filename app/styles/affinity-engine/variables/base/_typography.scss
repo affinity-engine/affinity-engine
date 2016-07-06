@@ -1,6 +1,6 @@
-$et-primary-serif: false !default;
-$et-primary-sans-serif: false !default;
-$ae-primary-font-family: false !default;
+$et-primary-serif: "Times New Roman", Times, serif !default;
+$et-primary-sans-serif: Arial, Helvetica, sans-serif !default;
+$et-primary-font-family: $et-primary-serif !default;
 
 $ae-default-line-height: 48px !default;
 
