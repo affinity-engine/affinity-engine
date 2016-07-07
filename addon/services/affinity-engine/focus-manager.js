@@ -7,5 +7,5 @@ const {
 
 export default Service.extend({
   isFocused: false,
-  focusStack: computed(() => Ember.A())
+  stack: computed(() => Ember.A())
 });

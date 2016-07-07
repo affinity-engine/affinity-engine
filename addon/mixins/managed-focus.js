@@ -27,12 +27,12 @@ export default Mixin.create({
 
     guidFor(this);
 
-    get(this, 'focusManager').pushObject(this);
+    get(this, 'focusManager.stack').pushObject(this);
   },
 
   willDestroyElement(...args) {
     this._super(...args);
 
-    get(this, 'focusManager').removeObject(this);
+    get(this, 'focusManager.stack').removeObject(this);
   }
 });
