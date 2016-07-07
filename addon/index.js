@@ -1,4 +1,5 @@
 import ConfigurableMixin from 'affinity-engine/mixins/configurable';
+import ManagedFocusMixin from 'affinity-engine/mixins/managed-focus';
 import WindowResizeMixin from 'affinity-engine/mixins/window-resize';
 
 import configurable, { deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
@@ -20,6 +21,7 @@ const initialize = function initialize(appInstance) {
 
 export {
   ConfigurableMixin,
+  ManagedFocusMixin,
   WindowResizeMixin,
   configurable,
   deepConfigurable,
