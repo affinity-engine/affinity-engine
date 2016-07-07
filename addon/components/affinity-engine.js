@@ -31,9 +31,9 @@ export default Component.extend({
   multitonManager: service('multiton-service-manager'),
   configService: multiton('affinity-engine/config', 'engineId'),
   fixtureStore: multiton('affinity-engine/fixture-store', 'engineId'),
-  stateManager: multiton('affinity-engine/state-manager', 'engineId'),
+  focusManager: multiton('affinity-engine/focus-manager', 'engineId'),
 
-  isFocused: alias('stateManager.isFocused'),
+  isFocused: alias('focusManager.isFocused'),
 
   init() {
     this._ensureEngineId();
