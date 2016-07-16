@@ -34,6 +34,9 @@ export default {
     tweenRate: 25
   },
   'affinity-engine': {
+    animator: {
+      path: 'service:affinity-engine/stubs/animator'
+    },
     preloader: {
       path: 'service:affinity-engine/stubs/preloader'
     },

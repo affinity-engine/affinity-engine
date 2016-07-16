@@ -5,7 +5,6 @@ import WindowResizeMixin from 'affinity-engine/mixins/window-resize';
 import configurable, { deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
 import registrant from 'affinity-engine/macros/affinity-engine/registrant';
 
-import animate from 'affinity-engine/utils/affinity-engine/animate';
 import deepMerge from 'affinity-engine/utils/affinity-engine/deep-merge';
 import deepStub from 'affinity-engine/utils/affinity-engine/deep-stub';
 import gatherTypes from 'affinity-engine/utils/affinity-engine/gather-types';
@@ -27,7 +26,6 @@ export {
   deepConfigurable,
   deepArrayConfigurable,
   registrant,
-  animate,
   deepMerge,
   deepStub,
   gatherTypes,
