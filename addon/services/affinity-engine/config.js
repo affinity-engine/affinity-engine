@@ -17,7 +17,7 @@ const {
 export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
   attrs: computed(() => Ember.Object.create()),
 
-  saveStateManager: registrant('saveStateManager'),
+  saveStateManager: registrant('affinity-engine/save-state-manager'),
 
   init() {
     const engineId = get(this, 'engineId');

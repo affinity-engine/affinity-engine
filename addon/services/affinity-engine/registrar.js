@@ -17,7 +17,7 @@ export default Service.extend({
   registrantMap: computed(() => Ember.Object.create()),
 
   register(name) {
-    const path = get(this, `config.attrs.${name}.path`);
+    const path = get(this, `config.attrs.${name.replace('/', '.')}.path`);
 
     if (isNone(path)) { return; }
 

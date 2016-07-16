@@ -115,43 +115,43 @@ test('`isFocused` is set by the `focus` event', function(assert) {
   assert.expect(3);
 
   const done = assert.async();
-  const stateManager = Ember.Object.create({ isFocused: false });
+  const focusManager = Ember.Object.create({ isFocused: false });
 
-  this.set('stateManager', stateManager);
+  this.set('focusManager', focusManager);
 
-  this.render(hbs`{{affinity-engine stateManager=stateManager}}`);
+  this.render(hbs`{{affinity-engine focusManager=focusManager}}`);
 
-  assert.equal(stateManager.get('isFocused'), false, '`isFocused` defaults to the stateManager value');
+  assert.equal(focusManager.get('isFocused'), false, '`isFocused` defaults to the focusManager value');
 
   $hook('affinity_engine').focus();
 
-  assert.equal(stateManager.get('isFocused'), false, '`isFocused` is not immediately set');
+  assert.equal(focusManager.get('isFocused'), false, '`isFocused` is not immediately set');
 
   later(() => {
-    assert.equal(stateManager.get('isFocused'), true, '`isFocused` is correctly set after delay');
+    assert.equal(focusManager.get('isFocused'), true, '`isFocused` is correctly set after delay');
 
     done();
   }, 200);
 });
 
-test('`isFocused` is lost by the `focus` event', function(assert) {
+test('`isFocused` is lost by the `blur` event', function(assert) {
   assert.expect(3);
 
   const done = assert.async();
-  const stateManager = Ember.Object.create({ isFocused: false });
+  const focusManager = Ember.Object.create({ isFocused: false });
 
-  this.set('stateManager', stateManager);
+  this.set('focusManager', focusManager);
 
-  this.render(hbs`{{affinity-engine stateManager=stateManager isFocused=true}}`);
+  this.render(hbs`{{affinity-engine focusManager=focusManager isFocused=true}}`);
 
-  assert.equal(stateManager.get('isFocused'), true, '`isFocused` can be passed in');
+  assert.equal(focusManager.get('isFocused'), true, '`isFocused` can be passed in');
 
   $hook('affinity_engine').blur();
 
-  assert.equal(stateManager.get('isFocused'), true, '`isFocused` is not immediately changed');
+  assert.equal(focusManager.get('isFocused'), true, '`isFocused` is not immediately changed');
 
   later(() => {
-    assert.equal(stateManager.get('isFocused'), false, '`isFocused` is correctly blurred after delay');
+    assert.equal(focusManager.get('isFocused'), false, '`isFocused` is correctly blurred after delay');
 
     done();
   }, 150);

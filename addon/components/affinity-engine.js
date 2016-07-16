@@ -7,7 +7,6 @@ const {
   get,
   isNone,
   isPresent,
-  on,
   set
 } = Ember;
 
@@ -35,12 +34,32 @@ export default Component.extend({
 
   isFocused: alias('focusManager.isFocused'),
 
-  init() {
+  init(...args) {
+    this._super(...args);
+
     this._ensureEngineId();
     get(this, 'configService').initializeConfig(get(this, 'config'));
     this._loadfixtures();
+  },
 
-    this._super();
+  willDestroyElement(...args) {
+    this._super(...args);
+
+    const engineId = get(this, 'engineId');
+
+    get(this, 'multitonManager').removeServices([{ engineId }]);
+  },
+
+  focusIn(...args) {
+    this._super(...args);
+
+    debounce(this, () => set(this, 'isFocused', true), focusDebounceDuration);
+  },
+
+  focusOut(...args) {
+    this._super(...args);
+
+    debounce(this, () => set(this, 'isFocused', false), focusDebounceDuration);
   },
 
   _ensureEngineId() {
@@ -61,20 +80,6 @@ export default Component.extend({
       });
     }
   },
-
-  destroyMultitons: on('willDestroyElement', function() {
-    const engineId = get(this, 'engineId');
-
-    get(this, 'multitonManager').removeServices([{ engineId }]);
-  }),
-
-  claimFocus: on('focusIn', function() {
-    debounce(this, () => set(this, 'isFocused', true), focusDebounceDuration);
-  }),
-
-  relinquishFocus: on('focusOut', function() {
-    debounce(this, () => set(this, 'isFocused', false), focusDebounceDuration);
-  }),
 
   actions: {
     completePreload() {

@@ -33,10 +33,12 @@ export default {
     },
     tweenRate: 25
   },
-  preloader: {
-    path: 'service:affinity-engine/stubs/preloader'
-  },
-  saveStateManager: {
-    path: 'service:affinity-engine/stubs/save-state-manager'
+  'affinity-engine': {
+    preloader: {
+      path: 'service:affinity-engine/stubs/preloader'
+    },
+    'save-state-manager': {
+      path: 'service:affinity-engine/stubs/save-state-manager'
+    }
   }
 };
