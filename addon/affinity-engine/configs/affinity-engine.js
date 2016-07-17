@@ -1,7 +1,6 @@
 export default {
   priority: 0,
   globals: {
-    classNames: ['ae-paper', 'ae-block'],
     cps: 25,
     keys: {
       accept: ['Space', 'Enter'],
