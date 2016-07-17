@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
 const {
+  assign,
   computed,
   get,
-  isPresent
+  isPresent,
+  typeOf
 } = Ember;
-
-const extend = Ember.$.extend;
 
 const createKeyPriorityPairs = function createKeyPriorityPairs(priorities, ...keys) {
   return keys.reduce((props, key) => {
@@ -20,7 +20,7 @@ const deepMerge = function deepMerge(properties, context, initial = {}) {
   const mergedProperty = properties.reduce((accumulator, property) => {
     const nextValue = get(context, property) || {};
 
-    return extend({}, nextValue, accumulator);
+    return assign({}, nextValue, accumulator);
   }, initial);
 
   return Ember.Object.create(mergedProperty);
@@ -58,6 +58,47 @@ export function deepArrayConfigurable(priorities, primaryKey, keys) {
       });
 
       return Ember.A(array);
+    }
+  });
+}
+
+const extractClassNames = function extractClassNames(classNamesContainer) {
+  return Object.values(classNamesContainer).reduce((classNames, childContainer) => {
+    switchClassNamesContainer(childContainer).forEach((className) => classNames.push(className));
+
+    return classNames;
+  }, []);
+};
+
+const switchClassNamesContainer = function switchClassNamesContainer(classNamesContainer) {
+  switch (typeOf(classNamesContainer)) {
+    case 'array': return classNamesContainer;
+    case 'string': return [classNamesContainer];
+    case 'object': return extractClassNames(classNamesContainer);
+    case 'instance': return extractClassNames(classNamesContainer);
+    default: return [];
+  }
+};
+
+const mergeObjects = function mergeObjects(priorityProperties, context) {
+  const values = priorityProperties.map((property) => {
+    return get(context, property);
+  }).filter((value) => typeOf(value) === 'object' || typeOf(value) === 'instance').reverse();
+
+  return assign({}, ...values);
+}
+
+export function classNamesConfigurable(priorities, keys) {
+  const properties = createKeyPriorityPairs(priorities, keys);
+
+  return computed(...properties, {
+    get() {
+      const priorityProperties = properties.filter((property) => get(this, property));
+      const firstTier = isPresent(priorityProperties) ? get(this, priorityProperties[0]) : undefined;
+      const isObject = typeOf(firstTier) === 'object' || typeOf(firstTier) === 'instance';
+      const value = isObject ? mergeObjects(priorityProperties, this) : firstTier;
+
+      return switchClassNamesContainer(value).join(' ');
     }
   });
 }
