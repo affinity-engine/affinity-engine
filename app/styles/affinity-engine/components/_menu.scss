@@ -7,10 +7,6 @@
     @extend .ae-button;
 
     display: block;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   .ae-menu-header {

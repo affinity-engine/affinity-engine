@@ -1,6 +1,6 @@
 $ae-menu-rhythm: $ae-default-line-height / 10 !default;
 
-$ae-menu-padding: $ae-menu-rhythm * 5 !default;
+$ae-menu-padding: $ae-menu-rhythm * 3 !default;
 $ae-menu-border-width: $ae-default-border-width !default;
 $ae-menu-opacity: $ae-semi-transparency !default;
 
@@ -9,7 +9,7 @@ $ae-menu-header-margin: 0 $ae-menu-rhythm !default;
 $ae-menu-header-margin-bottom: $ae-menu-rhythm * 8 !default;
 $ae-menu-header-font-family: $ae-primary-serif !default;
 
-$ae-menu-option-margin-bottom: $ae-menu-rhythm * 2 !default;
+$ae-menu-option-margin-ends: $ae-menu-rhythm !default;
 $ae-menu-option-font-size: $ae-small-font-size !default;
 $ae-menu-option-width: 100% !default;
 $ae-menu-option-font-weight: bold !default;
