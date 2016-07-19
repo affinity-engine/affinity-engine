@@ -3,7 +3,7 @@
 
   position: absolute;
 
-  .ember-columnar-menu-option-button {
+  .ember-flex-menu-option-button {
     @extend .ae-button;
 
     display: block;
@@ -13,12 +13,12 @@
     margin: $ae-menu-header-margin;
   }
 
-  .ember-columnar-menu-option-button, .ae-menu-header, .ember-columnar-menu-option-input {
+  .ember-flex-menu-option-button, .ae-menu-header, .ember-flex-menu-option-input {
     line-height: $ae-menu-child-line-height;
     text-align: $ae-menu-child-text-align;
   }
 
-  .ember-columnar-menu-option-input {
+  .ember-flex-menu-option-input {
     @extend .ae-input;
   }
 
@@ -29,7 +29,7 @@
     right: $ae-menu-padding;
     padding: 0 $ae-menu-padding;
 
-    .ember-columnar-menu-option-button-text {
+    .ember-flex-menu-option-button-text {
       @extend .ae-sr-only;
     }
   }
