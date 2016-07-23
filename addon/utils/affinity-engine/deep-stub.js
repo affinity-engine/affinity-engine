@@ -1,19 +1,9 @@
-import Ember from 'ember';
+export default function deepStub(path, object) {
+  return path.split('.').reverse().reduce((child, segment) => {
+    const parent = { };
 
-const { set } = Ember;
+    parent[segment] = child;
 
-export default function deepStub(path, attribute, value) {
-  const container = { };
-
-  path.split('.').reduce((parentObject, segment) => {
-    const childObject = { };
-
-    parentObject[segment] = childObject;
-
-    return childObject;
-  }, container);
-
-  set(container, `${path}.${attribute}`, value);
-
-  return container;
+    return parent;
+  }, object);
 }
