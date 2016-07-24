@@ -1,0 +1,12 @@
+$ae-primary-serif: "Times New Roman", Times, serif !default;
+$ae-primary-sans-serif: Arial, Helvetica, sans-serif !default;
+$ae-primary-font-family: $ae-primary-serif !default;
+$ae-secondary-font-family: $ae-primary-sans-serif !default;
+
+$ae-default-line-height: $ae-rhythm * 3 !default;
+
+$ae-default-font-size: $ae-rhythm * 2 !default;
+$ae-tiny-font-size: $ae-default-font-size * 0.6 !default;
+$ae-small-font-size: $ae-default-font-size * 0.8 !default;
+$ae-large-font-size: $ae-default-font-size * 1.2 !default;
+$ae-huge-font-size: $ae-default-font-size * 1.4 !default;
