@@ -22,7 +22,7 @@ export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
   init() {
     const engineId = get(this, 'engineId');
 
-    this.on(`ae:${engineId}:shouldResetEngine`, this, this.resetConfig);
+    this.on(`ae:${engineId}:refreshingFromState`, this, this.resetConfig);
 
     this._super();
   },
