@@ -10,11 +10,9 @@ import deepStub from 'affinity-engine/utils/affinity-engine/deep-stub';
 import gatherTypes from 'affinity-engine/utils/affinity-engine/gather-types';
 import nativeCopy from 'affinity-engine/utils/affinity-engine/native-copy';
 
-import { initialize as loadTranslations } from 'affinity-engine/instance-initializers/affinity-engine/load-translations';
 import { initialize as initializeConfig } from 'affinity-engine/instance-initializers/affinity-engine/register-configs';
 
 const initialize = function initialize(appInstance) {
-  loadTranslations(appInstance);
   initializeConfig(appInstance);
 };
 
