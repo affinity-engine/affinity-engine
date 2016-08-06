@@ -65,7 +65,7 @@ test('transitions can be delayed', function(assert) {
 
   const done = assert.async();
 
-  this.set('transitions', [{ effect: { opacity: 0.6 } }, { type: 'delay', duration: 10 }, { effect: { opacity: 0.4 } }]);
+  this.set('transitions', [{ effect: { opacity: 0.6 } }, { duration: 10 }, { effect: { opacity: 0.4 } }]);
 
   this.render(hbs`{{affinity-engine-transition-box transitions=transitions}}`);
 
@@ -85,7 +85,7 @@ test('resolve is executed after last transition completes', function(assert) {
   let hasResolved = false;
 
   this.set('resolve', () => assert.ok(hasResolved, 'it has resolved'));
-  this.set('transitions', [{ effect: { opacity: 0.6 } }, { type: 'delay', duration: 10 }, { effect: { opacity: 0.4 } }]);
+  this.set('transitions', [{ effect: { opacity: 0.6 } }, { duration: 10 }, { effect: { opacity: 0.4 } }]);
 
   this.render(hbs`{{affinity-engine-transition-box transitions=transitions resolve=resolve}}`);
 
@@ -105,7 +105,7 @@ test('transitions are deleted after entering queue', function(assert) {
 
   this.set('transitions', [
     { effect: { padding: '123px' } },
-    { type: 'delay', duration: 10 },
+    { duration: 10 },
     { effect: { padding: '1290px' } }
   ]);
 
@@ -130,7 +130,7 @@ test('multiple queues can run concurrently', function(assert) {
   this.set('transitions', [
     { effect: { opacity: 0.6 } },
     { queue: 'padding', effect: { padding: '123px' } },
-    { queue: 'padding', type: 'delay', duration: 10 },
+    { queue: 'padding', duration: 10 },
     { queue: 'padding', effect: { padding: '1290px' } },
     { effect: { opacity: 0.4 } }
   ]);
@@ -154,7 +154,7 @@ test('last transition can be a custom queue', function(assert) {
 
   this.set('transitions', [
     { queue: 'padding', effect: { padding: '123px' } },
-    { queue: 'padding', type: 'delay', duration: 10 },
+    { queue: 'padding', duration: 10 },
     { queue: 'padding', effect: { padding: '1290px' } }
   ]);
 

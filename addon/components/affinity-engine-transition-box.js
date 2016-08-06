@@ -72,9 +72,10 @@ export default Component.extend({
   },
 
   _transitionSwitch(transition) {
-    switch (get(transition, 'type')) {
-      case 'delay': return this._delay(transition);
-      default: return this._animate(transition);
+    if (isPresent(get(transition, 'effect'))) {
+      return this._animate(transition);
+    } else {
+      return this._delay(transition);
     }
   },
 
