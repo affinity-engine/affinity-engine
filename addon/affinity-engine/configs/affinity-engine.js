@@ -1,6 +1,5 @@
 export default {
   priority: 0,
-  cps: 25,
   keys: {
     accept: ['Space', 'Enter'],
     cancel: ['Escape'],
@@ -9,5 +8,14 @@ export default {
     moveRight: ['ArrowRight', 'KeyD', 'Numpad6'],
     moveUp: ['ArrowUp', 'KeyW', 'Numpad8']
   },
-  menuColumns: 1
+  cps: 25,
+  menuColumns: 1,
+  transitionIn: {
+    effect: { opacity: [1, 0] },
+    duration: 100
+  },
+  transitionOut: {
+    effect: { opacity: 0 },
+    duration: 100
+  }
 };
