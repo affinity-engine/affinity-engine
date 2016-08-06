@@ -6,7 +6,9 @@ const { RSVP: { resolve } } = Ember;
 export default Service.extend({
   isPlaceholder: true,
 
-  animate() {
+  animate(element, effect) {
+    Ember.$(element).css(effect);
+
     return resolve();
   }
 });

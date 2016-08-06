@@ -6,6 +6,8 @@ const {
 } = Ember;
 
 export default Service.extend({
+  isPlaceholder: true,
+
   locales: [],
 
   exists() { return false; },

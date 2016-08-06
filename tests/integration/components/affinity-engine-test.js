@@ -131,7 +131,7 @@ test('`isFocused` is set by the `focus` event', function(assert) {
     assert.equal(focusManager.get('isFocused'), true, '`isFocused` is correctly set after delay');
 
     done();
-  }, 200);
+  }, 250);
 });
 
 test('`isFocused` is lost by the `blur` event', function(assert) {
@@ -154,7 +154,7 @@ test('`isFocused` is lost by the `blur` event', function(assert) {
     assert.equal(focusManager.get('isFocused'), false, '`isFocused` is correctly blurred after delay');
 
     done();
-  }, 150);
+  }, 250);
 });
 
 test('`completePreload` sets `isLoaded` to true', function(assert) {
