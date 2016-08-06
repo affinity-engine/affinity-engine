@@ -8,7 +8,8 @@ const {
   K,
   get,
   getProperties,
-  isNone
+  isNone,
+  isPresent
 } = Ember;
 
 const { RSVP: { resolve } } = Ember;
@@ -32,11 +33,11 @@ export default Component.extend({
   },
 
   _queueTransitions() {
-    const transitions = get(this, 'transitions');
     const queue = get(this, '_transitionQueue');
 
-    transitions.forEach((transition) => queue.push(transition));
-    transitions.length = 0; // clear array
+    get(this, 'transitions').forEach((transition) => queue.push(transition));
+
+    Reflect.deleteProperty(this, 'transitions');
   },
 
   _mainQueueTask: task(function * () {
@@ -65,7 +66,7 @@ export default Component.extend({
 
   _startParallelQueue(queueName, queue) {
     const exitTransition = queue.find((transition) => get(transition, 'queue') !== queueName);
-    const queueLength = queue.indexOf(exitTransition);
+    const queueLength = isPresent(exitTransition) ? queue.indexOf(exitTransition) : queue.length;
 
     get(this, '_queueTask').perform(queueName, queue.splice(0, queueLength));
   },
