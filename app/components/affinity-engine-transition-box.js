@@ -1,1 +1,0 @@
-export { default } from 'affinity-engine/components/affinity-engine-transition-box';
