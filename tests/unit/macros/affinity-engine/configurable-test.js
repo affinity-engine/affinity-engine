@@ -1,8 +1,40 @@
 import Ember from 'ember';
-import { classNamesConfigurable } from 'affinity-engine';
+import { configurable, classNamesConfigurable } from 'affinity-engine';
 import { module, test } from 'qunit';
 
 module('Unit | Macro | affinity-engine configurable');
+
+const ConfigurableObject = Ember.Object.extend({
+  foo: {
+    nested: {
+      string: 'nested value'
+    }
+  },
+  bar: {
+    string: 'flat value'
+  },
+  baz: { }
+});
+
+test('`configurable` returns the value for the first non-empty key', function(assert) {
+  assert.expect(1);
+
+  const configurableObject = ConfigurableObject.extend({
+    stringValue: configurable(['foo', 'bar', 'baz'], 'string')
+  }).create();
+
+  assert.equal(configurableObject.get('stringValue'), 'flat value', 'string is correct');
+});
+
+test('`configurable` handles nested values', function(assert) {
+  assert.expect(1);
+
+  const configurableObject = ConfigurableObject.extend({
+    stringValue: configurable(['foo.nested', 'bar', 'baz'], 'string')
+  }).create();
+
+  assert.equal(configurableObject.get('stringValue'), 'nested value', 'string is correct');
+});
 
 const ConfigurableClassNamesObject = Ember.Object.extend({
   none: {
