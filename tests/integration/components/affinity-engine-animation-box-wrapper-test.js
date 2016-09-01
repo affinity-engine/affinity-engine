@@ -33,7 +33,7 @@ test('it sends `transitions` to its child `ember-animation-box`', function(asser
 
   this.render(hbs`{{affinity-engine-animation-box-wrapper transitions=transitions}}`);
 
-  assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'transition was executed');
+  assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'transition was executed');
 });
 
 test('it sends `transitions` to its child `ember-animation-box`, all of which are performed', function(assert) {
@@ -43,7 +43,7 @@ test('it sends `transitions` to its child `ember-animation-box`, all of which ar
 
   this.render(hbs`{{affinity-engine-animation-box-wrapper transitions=transitions}}`);
 
-  assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'transitions were executed');
+  assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'transitions were executed');
 });
 
 test('new `transitions` can be added to its queue', function(assert) {
@@ -56,12 +56,12 @@ test('new `transitions` can be added to its queue', function(assert) {
 
     this.render(hbs`{{affinity-engine-animation-box-wrapper transitions=transitions}}`);
 
-    assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'transition was executed');
+    assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'transition was executed');
 
     this.get('transitions').pushObject({ effect: { opacity: 0.7 } });
 
     later(() => {
-      assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'second transition was executed');
+      assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'second transition was executed');
 
       done();
     });
@@ -77,7 +77,7 @@ test('it prepends the `transitionIn` transition on `init`', function(assert) {
   this.render(hbs`{{affinity-engine-animation-box-wrapper transitionIn=transitionIn transitions=transitions}}`);
 
   assert.equal(this.$(hook('ember_animation_box')).css('color'), 'rgb(51, 51, 51)', 'transitionIn was executed');
-  assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'transitionIn was executed first');
+  assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'transitionIn was executed first');
 });
 
 test('it executes the `transitionOut` transition when `willTransitionOut` is true', function(assert) {
@@ -95,23 +95,23 @@ test('it executes the `transitionOut` transition when `willTransitionOut` is tru
       willTransitionOut=willTransitionOut
     }}`);
 
-    assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'transition was executed');
+    assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'transition was executed');
 
     this.set('willTransitionOut', true);
 
     later(() => {
-      assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'transitionOut was executed');
+      assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'transitionOut was executed');
       this.get('transitions').pushObject({ effect: { opacity: 0.5 } });
       this.set('willTransitionOut', false);
     }, 5);
 
     later(() => {
-      assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'new transition was executed');
+      assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'new transition was executed');
       this.set('willTransitionOut', true);
     }, 20);
 
     later(() => {
-      assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'transitionOut was not reexecuted');
+      assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'transitionOut was not reexecuted');
 
       done();
     }, 40);
@@ -124,7 +124,7 @@ test('it triggers `didTransitionOut` after transitioning out', function(assert) 
   this.set('transitionOut', { effect: { opacity: 0.7 } });
   this.set('transitions', Ember.A([{ effect: { opacity: 0.5 } }]));
   this.set('didTransitionOut', () => {
-    assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'transitionOut was executed');
+    assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'transitionOut was executed');
   });
 
   this.render(hbs`{{affinity-engine-animation-box-wrapper
@@ -145,7 +145,7 @@ test('it triggers `didCompleteQueue` after each queue completes', function(asser
   run(() => {
     this.set('transitions', Ember.A([{ effect: { opacity: 0.3 } }, { effect: { opacity: 0.5 } }]));
     this.set('didCompleteQueue', () => {
-      assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.5, 'transition was completed');
+      assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.5, 'transition was completed');
     });
 
     this.render(hbs`{{affinity-engine-animation-box-wrapper
@@ -155,7 +155,7 @@ test('it triggers `didCompleteQueue` after each queue completes', function(asser
 
     later(()  => {
       this.set('didCompleteQueue', () => {
-        assert.equal(this.$(hook('ember_animation_box')).css('opacity'), 0.7, 'second transition was completed');
+        assert.equal(parseFloat(this.$(hook('ember_animation_box')).css('opacity')).toFixed(1), 0.7, 'second transition was completed');
 
         done();
       });
