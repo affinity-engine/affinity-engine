@@ -1,5 +1,6 @@
 export default {
   priority: 0,
+  animationLibrary: 'jquery',
   keys: {
     accept: ['Space', 'Enter'],
     cancel: ['Escape'],
