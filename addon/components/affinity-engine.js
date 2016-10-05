@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/affinity-engine';
+import { task, timeout } from 'ember-concurrency';
 import multiton from 'ember-multiton-service';
 
 const {
@@ -12,9 +13,6 @@ const {
 
 const { computed: { alias } } = Ember;
 const { inject: { service } } = Ember;
-const { run: { debounce } } = Ember;
-
-const focusDebounceDuration = 100;
 
 export default Component.extend({
   layout,
@@ -53,14 +51,20 @@ export default Component.extend({
   focusIn(...args) {
     this._super(...args);
 
-    debounce(this, () => set(this, 'isFocused', true), focusDebounceDuration);
+    get(this, '_debouncingFocusTask').perform(true);
   },
 
   focusOut(...args) {
     this._super(...args);
 
-    debounce(this, () => set(this, 'isFocused', false), focusDebounceDuration);
+    get(this, '_debouncingFocusTask').perform(false);
   },
+
+  _debouncingFocusTask: task(function * (value) {
+    yield timeout(100);
+
+    set(this, 'isFocused', value);
+  }).restartable(),
 
   _ensureEngineId() {
     if (isNone(get(this, 'engineId'))) {

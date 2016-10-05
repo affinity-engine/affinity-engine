@@ -20,16 +20,16 @@ export default Mixin.create({
   engineIsFocused: reads('focusManager.isFocused'),
   isFocused: and('engineIsFocused', 'isTopOfStack'),
 
-  isTopOfStack: computed('focusManager.stack.lastObject', 'guid', {
+  isTopOfStack: computed('focusManager.stack.firstObject', 'guid', {
     get() {
-      return get(this, 'focusManager.stack.lastObject') === get(this, 'guid');
+      return get(this, 'focusManager.stack.firstObject') === get(this, 'guid');
     }
   }),
 
   init(...args) {
     this._super(...args);
 
-    get(this, 'focusManager.stack').pushObject(set(this, 'guid', guidFor(this)));
+    get(this, 'focusManager.stack').unshiftObject(set(this, 'guid', guidFor(this)));
   },
 
   willDestroyElement(...args) {
