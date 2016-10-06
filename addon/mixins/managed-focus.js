@@ -27,12 +27,16 @@ export default Mixin.create({
   init(...args) {
     this._super(...args);
 
-    next(() => get(this, 'focusManager.stack').unshiftObject(set(this, 'guid', guidFor(this))));
+    const stack = get(this, 'focusManager.stack');
+
+    next(() => stack.unshiftObject(set(this, 'guid', guidFor(this))));
   },
 
   willDestroyElement(...args) {
     this._super(...args);
 
-    get(this, 'focusManager.stack').removeObject(get(this, 'guid'));
+    const stack = get(this, 'focusManager.stack');
+
+    next(() => stack.removeObject(get(this, 'guid')));
   }
 });
