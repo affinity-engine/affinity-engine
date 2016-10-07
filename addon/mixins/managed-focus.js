@@ -6,12 +6,12 @@ const {
   computed,
   get,
   guidFor,
+  isNone,
   set
 } = Ember;
 
 const {
-  and,
-  reads
+  and
 } = computed;
 
 const { run: { next } } = Ember;
@@ -19,7 +19,6 @@ const { run: { next } } = Ember;
 export default Mixin.create({
   focusManager: multiton('affinity-engine/focus-manager', 'engineId'),
 
-  engineIsFocused: reads('focusManager.isFocused'),
   isFocused: and('engineIsFocused', 'isTopOfStack'),
 
   init(...args) {
@@ -37,6 +36,14 @@ export default Mixin.create({
 
     next(() => stack.removeObject(get(this, 'guid')));
   },
+
+  engineIsFocused: computed('focusManager.isFocused', {
+    get() {
+      if (isNone(get(this, 'engineId'))) { return false; }
+
+      return get(this, 'focusManager.isFocused')
+    }
+  }),
 
   isTopOfStack: computed({
     get() {
