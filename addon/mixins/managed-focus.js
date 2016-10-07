@@ -11,7 +11,6 @@ const {
 
 const {
   and,
-  equal,
   reads
 } = computed;
 
@@ -22,7 +21,6 @@ export default Mixin.create({
 
   engineIsFocused: reads('focusManager.isFocused'),
   isFocused: and('engineIsFocused', 'isTopOfStack'),
-  isTopOfStack: equal('focusManager.stack.firstObject', 'guid'),
 
   init(...args) {
     this._super(...args);
@@ -38,5 +36,11 @@ export default Mixin.create({
     const stack = get(this, 'focusManager.stack');
 
     next(() => stack.removeObject(get(this, 'guid')));
-  }
+  },
+
+  isTopOfStack: computed({
+    get() {
+      return get(this, 'focusManager.stack.firstObject') === get(this, 'guid');
+    }
+  })
 });
