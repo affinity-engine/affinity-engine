@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import { BusPublisherMixin, BusSubscriberMixin } from 'ember-message-bus';
 import { deepMerge, gatherTypes, registrant } from 'affinity-engine';
+import multiton from 'ember-multiton-service';
 
 const {
   Service,
@@ -14,17 +14,16 @@ const {
   typeOf
 } = Ember;
 
-export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
+export default Service.extend({
   attrs: computed(() => Ember.Object.create()),
 
-  saveStateManager: registrant('affinity-engine/data-manager'),
+  eBus: multiton('message-bus', 'engineId'),
+  dataManager: registrant('affinity-engine/data-manager'),
 
-  init() {
-    const engineId = get(this, 'engineId');
+  init(...args) {
+    this._super(...args);
 
-    this.on(`ae:${engineId}:refreshingFromState`, this, this.resetConfig);
-
-    this._super();
+    get(this, 'eBus').subscribe('refreshingFromState', this, this.resetConfig);
   },
 
   initializeConfig(engineConfig = {}) {
@@ -41,8 +40,8 @@ export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
 
     setProperties(attrs, mergedConfig);
 
-    const saveStateManager = get(this, 'saveStateManager');
-    const savedConfig = saveStateManager.getStateValue('_config') || {};
+    const dataManager = get(this, 'dataManager');
+    const savedConfig = dataManager.getStateValue('_config') || {};
     const savedMergedConfig = deepMerge({}, mergedConfig, savedConfig);
 
     return setProperties(attrs, savedMergedConfig);
@@ -65,18 +64,16 @@ export default Service.extend(BusPublisherMixin, BusSubscriberMixin, {
 
   setProperty(key, value) {
     const _config = this._getSavedConfig(key);
-    const engineId = get(this, 'engineId');
 
     set(_config, key, value);
-
-    this.publish(`ae:${engineId}:shouldSetStateValue`, '_config', _config);
+    get(this, 'eBus').publish('shouldSetStateValue', '_config', _config);
 
     return set(this, key, value);
   },
 
   _getSavedConfig(key) {
-    const saveStateManager = get(this, 'saveStateManager');
-    const _config = get(saveStateManager, '_config') || {};
+    const dataManager = get(this, 'dataManager');
+    const _config = get(dataManager, '_config') || {};
 
     const segments = key.split('.');
 
