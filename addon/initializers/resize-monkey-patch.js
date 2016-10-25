@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ResizeService from 'ember-resize/services/resize';
-import config from '../config/environment';
+import config from 'ember-get-config';
 
 const { getWithDefault } = Ember;
 
