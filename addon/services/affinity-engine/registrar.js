@@ -16,7 +16,7 @@ export default Service.extend({
   registrantMap: computed(() => Ember.Object.create()),
 
   register(name) {
-    const path = get(this, `config.attrs.${name.replace('/', '.')}.path`) || `service:${name}`;
+    const path = get(this, `config.attrs.registrant.${name.replace('/', '.')}.path`) || `service:${name}`;
 
     const { engineId, registrantMap } = getProperties(this, 'engineId', 'registrantMap');
     const container = getOwner(this);
