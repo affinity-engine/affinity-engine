@@ -1,5 +1,5 @@
 export default {
-  globals: {
+  global: {
     title: 'Affinity Engine Demo'
   }
 };
