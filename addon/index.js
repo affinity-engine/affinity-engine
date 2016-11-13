@@ -1,6 +1,5 @@
 import ConfigurableMixin from 'affinity-engine/mixins/configurable';
 import ManagedFocusMixin from 'affinity-engine/mixins/managed-focus';
-import WindowResizeMixin from 'affinity-engine/mixins/window-resize';
 
 import configurable, { classNamesConfigurable, deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
 import registrant from 'affinity-engine/macros/affinity-engine/registrant';
@@ -19,7 +18,6 @@ const initialize = function initialize(appInstance) {
 export {
   ConfigurableMixin,
   ManagedFocusMixin,
-  WindowResizeMixin,
   configurable,
   classNamesConfigurable,
   deepConfigurable,

@@ -52,8 +52,7 @@
     "ember-hook": "^1.3.3",
     "ember-keyboard": "^2.1.3",
     "ember-message-bus": "^0.3.2",
-    "ember-multiton-service": "^0.1.1",
-    "ember-resize": "^0.0.17"
+    "ember-multiton-service": "^0.1.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
