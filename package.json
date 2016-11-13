@@ -56,9 +56,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://www.affinityengine.org",
-    "after": [
-      "ember-resize"
-    ]
+    "demoURL": "http://www.affinityengine.org"
   }
 }
