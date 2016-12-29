@@ -11,4 +11,4 @@ Just a fair warning. This project is still in early alpha and you should expect 
 
 ## Documentation
 
-You'll find it [here](http://www.ember.engine/learn).
+You'll find the interactive guides [here](http://www.affinityengine.org).
