@@ -21,15 +21,14 @@
     "ember-animation-box": "git+https://github.com/null-null-null/ember-animation-box.git",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.0.3",
-    "ember-cli-sass": "^5.3.1",
+    "ember-cli-sass": "^6.0.0",
     "ember-concurrency": "^0.7.8",
     "ember-get-config": "^0.1.11",
     "ember-hook": "^1.3.3",
     "ember-keyboard": "^2.1.3",
     "ember-message-bus": "^0.3.2",
     "ember-multiton-service": "^0.1.1",
-    "ember-resize-for-addons": "^0.0.1",
-    "ember-cli-sass": "^6.0.0"
+    "ember-resize-for-addons": "^0.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
