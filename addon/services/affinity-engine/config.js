@@ -41,7 +41,7 @@ export default Service.extend({
     setProperties(attrs, mergedConfig);
 
     const dataManager = get(this, 'dataManager');
-    const savedConfig = dataManager.getStateValue('_config') || {};
+    const savedConfig = dataManager.get('data._config') || {};
     const savedMergedConfig = deepMerge({}, mergedConfig, savedConfig);
 
     return setProperties(attrs, savedMergedConfig);

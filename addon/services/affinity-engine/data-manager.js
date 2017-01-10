@@ -8,9 +8,5 @@ const {
 export default Service.extend({
   isPlaceholder: true,
 
-  getStateValue() {
-    return {};
-  },
-
   setStateValue: K
 });
