@@ -27,6 +27,7 @@ export default Component.extend({
 
   multitonManager: service('multiton-service-manager'),
   configService: multiton('affinity-engine/config', 'engineId'),
+  eBus: multiton('message-bus', 'engineId'),
   fixtureStore: multiton('affinity-engine/fixture-store', 'engineId'),
   focusManager: multiton('affinity-engine/focus-manager', 'engineId'),
 
@@ -37,6 +38,7 @@ export default Component.extend({
 
     this._ensureEngineId();
     get(this, 'configService').initializeConfig(get(this, 'config'));
+    get(this, 'eBus').subscribe('readyToRunGame', this, this._readyToRunGame);
     this._loadfixtures();
   },
 
@@ -72,6 +74,10 @@ export default Component.extend({
     }
   },
 
+  _readyToRunGame() {
+    set(this, 'isLoaded', true);
+  },
+
   _loadfixtures() {
     const fixtureStore = get(this, 'fixtureStore');
     const fixtureMap = get(this, 'fixtures');
@@ -82,12 +88,6 @@ export default Component.extend({
       fixtureKeys.forEach((key) => {
         fixtureStore.add(key, fixtureMap[key]);
       });
-    }
-  },
-
-  actions: {
-    completePreload() {
-      set(this, 'isLoaded', true);
     }
   }
 });

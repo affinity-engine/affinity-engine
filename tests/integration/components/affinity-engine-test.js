@@ -2,10 +2,15 @@ import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { $hook, initialize as initializeHook } from 'ember-hook';
+import { initializeQUnitAssertions } from 'ember-message-bus';
 import { initialize as initializeEngine } from 'affinity-engine';
+import multiton from 'ember-multiton-service';
 
 const { getOwner } = Ember;
 const { run: { later } } = Ember;
+
+const Publisher = Ember.Object.extend({ eBus: multiton('message-bus', 'engineId'), engineId: 'foo' });
+let publisher;
 
 moduleForComponent('affinity-engine', 'Integration | Component | ember engine', {
   integration: true,
@@ -14,7 +19,10 @@ moduleForComponent('affinity-engine', 'Integration | Component | ember engine', 
     const appInstance = getOwner(this);
 
     initializeHook();
+    initializeQUnitAssertions(appInstance, 'eBus', Ember.Object.extend({ eBus: multiton('message-bus', 'engineId'), engineId: 'foo' }));
     initializeEngine(appInstance);
+    appInstance.register('ember-message-bus:publisher', Publisher);
+    publisher = appInstance.lookup('ember-message-bus:publisher');
   }
 });
 
@@ -157,22 +165,26 @@ test('`isFocused` is lost by the `blur` event', function(assert) {
   }, 250);
 });
 
-test('`completePreload` sets `isLoaded` to true', function(assert) {
-  assert.expect(3);
+test('`readyToRunGame` sets `isLoaded` to true', function(assert) {
+  assert.expect(2);
+
+  const done = assert.async();
 
   this.render(hbs`
-    {{#affinity-engine as |engine|}}
-      <button {{action engine.completePreload}} data-test={{hook "complete_preload"}}>{{engine.isLoaded}}</button>
+    {{#affinity-engine engineId="foo" as |engine|}}
+      <div data-test={{hook "complete_preload"}}>{{engine.isLoaded}}</div>
     {{/affinity-engine}}
   `);
 
-  assert.equal($hook('complete_preload').text().trim(), '', '`isLoaded` defaults to undefined');
+  Ember.run(() => {
+    assert.equal($hook('complete_preload').text().trim(), '', '`isLoaded` defaults to undefined');
 
-  $hook('complete_preload').click();
+    publisher.get('eBus').publish('readyToRunGame');
 
-  assert.equal($hook('complete_preload').text().trim(), 'true', '`isLoaded` changed to true');
+    Ember.run.next(() => {
+      assert.equal($hook('complete_preload').text().trim(), 'true', '`isLoaded` changed to true');
 
-  $hook('complete_preload').click();
-
-  assert.equal($hook('complete_preload').text().trim(), 'true', '`isLoaded` remained to true');
+      done();
+    });
+  });
 });
