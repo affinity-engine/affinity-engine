@@ -3,7 +3,6 @@ import layout from '../templates/components/affinity-engine-animation-box-wrappe
 
 const {
   Component,
-  K,
   computed,
   get,
   getProperties,
@@ -19,7 +18,7 @@ export default Component.extend({
   tagName: '',
 
   classNames: '',
-  externalAction: K,
+  externalAction() {},
   transitions: computed(() => Ember.A()),
 
   init(...args) {

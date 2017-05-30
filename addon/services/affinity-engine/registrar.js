@@ -20,7 +20,7 @@ export default Service.extend({
 
     const { engineId, registrantMap } = getProperties(this, 'engineId', 'registrantMap');
     const container = getOwner(this);
-    const instance = container._lookupFactory(path).create({ engineId });
+    const instance = container.factoryFor(path).create({ engineId });
 
     return set(registrantMap, name, instance);
   },

@@ -1,16 +1,15 @@
 module.exports = {
-  "root": true,
+  root: true,
   "globals": {
     "Reflect": true
   },
-  parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2017,
     sourceType: 'module'
   },
   extends: 'eslint:recommended',
   env: {
-    'browser': true
+    browser: true
   },
   rules: {
   }
