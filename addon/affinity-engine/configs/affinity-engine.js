@@ -19,6 +19,10 @@ export default {
     transitionOut: {
       effect: { opacity: 0 },
       duration: 100
-    }
+    },
+    tweenEffect: {
+      opacity: 1
+    },
+    tweenRate: 100
   }
 };
