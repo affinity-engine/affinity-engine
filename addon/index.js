@@ -3,6 +3,7 @@ import ManagedFocusMixin from 'affinity-engine/mixins/managed-focus';
 import ResizeMixin from 'affinity-engine/mixins/resize';
 
 import configurable, { classNamesConfigurable, deepConfigurable, deepArrayConfigurable } from 'affinity-engine/macros/affinity-engine/configurable';
+import classNames from 'affinity-engine/macros/affinity-engine/class-names';
 import registrant from 'affinity-engine/macros/affinity-engine/registrant';
 
 import deepMerge from 'affinity-engine/utils/affinity-engine/deep-merge';
@@ -20,6 +21,7 @@ export {
   ConfigurableMixin,
   ManagedFocusMixin,
   ResizeMixin,
+  classNames,
   configurable,
   classNamesConfigurable,
   deepConfigurable,
