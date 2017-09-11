@@ -10,7 +10,8 @@ const {
 
 const createKeyPriorityPairs = function createKeyPriorityPairs(priorities, ...keys) {
   return keys.reduce((props, key) => {
-    priorities.forEach((priority) => props.push(`${priority}.${key}`));
+    props.push(`configuration.${key}`);
+    priorities.forEach((priority) => props.push(`config.attrs.${priority}.attrs.${key}`));
 
     return props;
   }, []);

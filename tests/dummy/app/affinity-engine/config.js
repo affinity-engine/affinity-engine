@@ -1,5 +1,5 @@
 export default {
-  global: {
+  children: {
     title: 'Affinity Engine Demo'
   }
 };

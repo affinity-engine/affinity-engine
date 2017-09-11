@@ -5,15 +5,25 @@ import { module, test } from 'qunit';
 module('Unit | Macro | affinity-engine configurable');
 
 const ConfigurableObject = Ember.Object.extend({
-  foo: {
-    nested: {
-      string: 'nested value'
+  config: {
+    attrs: {
+      foo: {
+        nested: {
+          attrs: {
+            string: 'nested value'
+          }
+        }
+      },
+      bar: {
+        attrs: {
+          string: 'flat value'
+        }
+      },
+      baz: {
+        attrs: {}
+      }
     }
-  },
-  bar: {
-    string: 'flat value'
-  },
-  baz: { }
+  }
 });
 
 test('`configurable` returns the value for the first non-empty key', function(assert) {
@@ -37,26 +47,39 @@ test('`configurable` handles nested values', function(assert) {
 });
 
 const ConfigurableClassNamesObject = Ember.Object.extend({
-  none: {
-  },
-  string: {
-    classNames: 'string1'
-  },
-  array: {
-    classNames: ['array1', 'array2']
-  },
-  objectA: {
-    classNames: {
-      1: ['objectA1'],
-      2: ['objectA2', 'objectA3']
+  config: {
+    attrs: {
+      none: {
+        attrs: {}
+      },
+      string: {
+        attrs: {
+          classNames: 'string1'
+        }
+      },
+      array: {
+        attrs: {
+          classNames: ['array1', 'array2']
+        }
+      },
+      objectA: {
+        attrs: {
+          classNames: {
+            1: ['objectA1'],
+            2: ['objectA2', 'objectA3']
+          }
+        }
+      },
+      objectB: {
+        attrs: {
+          classNames: Ember.Object.create({
+            1: 'objectB1',
+            4: 'objectB4',
+            5: undefined
+          })
+        }
+      }
     }
-  },
-  objectB: {
-    classNames: Ember.Object.create({
-      1: 'objectB1',
-      4: 'objectB4',
-      5: undefined
-    })
   }
 });
 

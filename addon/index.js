@@ -1,3 +1,4 @@
+import AnimatableMixin from 'affinity-engine/mixins/animatable';
 import ConfigurableMixin from 'affinity-engine/mixins/configurable';
 import ManagedFocusMixin from 'affinity-engine/mixins/managed-focus';
 import ResizeMixin from 'affinity-engine/mixins/resize';
@@ -18,6 +19,7 @@ const initialize = function initialize(appInstance) {
 };
 
 export {
+  AnimatableMixin,
   ConfigurableMixin,
   ManagedFocusMixin,
   ResizeMixin,
