@@ -1,6 +1,6 @@
 export default {
   priority: 0,
-  children: {
+  all: {
     attrs: {
       animator: 'jquery',
       keys: {
