@@ -47,6 +47,7 @@ export default Component.extend({
 
     const engineId = get(this, 'engineId');
 
+    get(this, 'eBus').publish('engineWillBeDestroyed');
     get(this, 'multitonManager').removeServices([{ engineId }]);
   },
 
