@@ -23,6 +23,7 @@ export default Component.extend({
   ariaRole: 'region',
   attributeBindings: ['aria-live', 'tabIndex'],
   classNames: ['affinity-engine'],
+  classNameBindings: ['isFocused'],
   tabIndex: 0,
 
   multitonManager: service('multiton-service-manager'),
