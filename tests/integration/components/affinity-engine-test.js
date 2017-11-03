@@ -120,7 +120,7 @@ test('`destroyMultitons` triggers `multitonManager` on destroy', function(assert
 });
 
 test('`isFocused` is set by the `focus` event', function(assert) {
-  assert.expect(3);
+  assert.expect(2);
 
   const done = assert.async();
   const focusManager = Ember.Object.create({ isFocused: false });
@@ -133,8 +133,6 @@ test('`isFocused` is set by the `focus` event', function(assert) {
 
   $hook('affinity_engine').focus();
 
-  assert.equal(focusManager.get('isFocused'), false, '`isFocused` is not immediately set');
-
   later(() => {
     assert.equal(focusManager.get('isFocused'), true, '`isFocused` is correctly set after delay');
 
@@ -143,7 +141,7 @@ test('`isFocused` is set by the `focus` event', function(assert) {
 });
 
 test('`isFocused` is lost by the `blur` event', function(assert) {
-  assert.expect(3);
+  assert.expect(2);
 
   const done = assert.async();
   const focusManager = Ember.Object.create({ isFocused: false });
@@ -155,8 +153,6 @@ test('`isFocused` is lost by the `blur` event', function(assert) {
   assert.equal(focusManager.get('isFocused'), true, '`isFocused` can be passed in');
 
   $hook('affinity_engine').blur();
-
-  assert.equal(focusManager.get('isFocused'), true, '`isFocused` is not immediately changed');
 
   later(() => {
     assert.equal(focusManager.get('isFocused'), false, '`isFocused` is correctly blurred after delay');

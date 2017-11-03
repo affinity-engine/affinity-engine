@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import layout from '../templates/components/affinity-engine';
-import { task, timeout } from 'ember-concurrency';
 import multiton from 'ember-multiton-service';
 
 const {
@@ -55,20 +54,14 @@ export default Component.extend({
   focusIn(...args) {
     this._super(...args);
 
-    get(this, '_debouncingFocusTask').perform(true);
+    set(this, 'isFocused', true);
   },
 
   focusOut(...args) {
     this._super(...args);
 
-    get(this, '_debouncingFocusTask').perform(false);
+    set(this, 'isFocused', false);
   },
-
-  _debouncingFocusTask: task(function * (value) {
-    yield timeout(100);
-
-    set(this, 'isFocused', value);
-  }).restartable(),
 
   _ensureEngineId() {
     if (isNone(get(this, 'engineId'))) {
