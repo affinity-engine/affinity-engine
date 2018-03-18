@@ -45,7 +45,7 @@ export default Mixin.create({
     }
   }),
 
-  isTopOfStack: computed({
+  isTopOfStack: computed('guid', 'focusManager.stack.firstObject', {
     get() {
       return get(this, 'focusManager.stack.firstObject') === get(this, 'guid');
     }
