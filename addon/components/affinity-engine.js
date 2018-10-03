@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import layout from '../templates/components/affinity-engine';
 import multiton from 'ember-multiton-service';
+import { next } from '@ember/runloop';
 
 const {
   Component,
@@ -54,13 +55,13 @@ export default Component.extend({
   focusIn(...args) {
     this._super(...args);
 
-    set(this, 'isFocused', true);
+    next(() => set(this, 'isFocused', true));
   },
 
   focusOut(...args) {
     this._super(...args);
 
-    set(this, 'isFocused', false);
+    next(() => set(this, 'isFocused', false));
   },
 
   _ensureEngineId() {
